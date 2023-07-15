@@ -22,10 +22,8 @@ if __name__ == '__main__':
     surnames = soup.find_all("a", class_="search-result__link")
     for surname in surnames:
         continue_url = surname['href']
-
-    new_url = 'https://login.dnevnik.ru/login'
-    print(new_url)
-    page = requests.get(new_url)
+    print(url + continue_url)
+    page = requests.get('https://ruz.spbstu.ru' + continue_url + '?date='+args.date[0]+'-'+args.date[1]+'-'+args.date[2])
     soup = BeautifulSoup(page.text, "html.parser")
 
     quotes = soup.find_all('span', class_='lesson__time')
@@ -57,5 +55,3 @@ if __name__ == '__main__':
     plt.ylabel('Кол-во пар')
     plt.title('График зависимости кол-ва пар от дня недели')
     plt.show()
-
-
